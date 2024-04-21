@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "261128275046",
+    "project_id": "lpgenius",
+    "storage_bucket": "lpgenius.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261128275046:android:db8bce7f526bf8ad4819a7",
+        "android_client_info": {
+          "package_name": "com.se.smartlpgprovider"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqAm5NvKuXuxw3V72MC-b9QKXcV-6TW6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
