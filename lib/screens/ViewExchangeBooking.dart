@@ -12,21 +12,13 @@ class ViewExchangeBookingPage extends StatefulWidget {
 }
 
 class ViewExchangeBookingPageState extends State<ViewExchangeBookingPage> {
-  //final auth = FirebaseAuth.instance ;
   final complainController = TextEditingController();
-  var size = "";
-  var color = '';
-  var price = "";
-  var date = "";
-  var time = "";
-  var payment = "";
-  var delivery = "";
-  var status = "";
+  List<Map<String, dynamic>> exchangeBookings = [];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    _fetch();
   }
 
   @override
@@ -40,346 +32,22 @@ class ViewExchangeBookingPageState extends State<ViewExchangeBookingPage> {
       backgroundColor: Colors.amber[100],
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /*  const SizedBox(height: 20.0),
-            Container(
-              alignment: Alignment.center,
-              child: Image.asset(
-                'images/KG.png',
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-            */
-            const SizedBox(height: 40.0),
+            SizedBox(height: 20.0),
             Text(
               'Exchange Booking Details',
               style: GoogleFonts.montserrat(
-                  fontSize: 23.0, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10.0),
-            InkWell(
-              child: Card(
-                color: Colors.amber[200],
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                    color: Colors.amber,
-                  ),
-                  borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '   Size    ',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 18.0,
-                          ),
-                        ),
-                        FutureBuilder(
-                          future: _fetch(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState !=
-                                ConnectionState.done) {
-                              return Text("  ");
-                            }
-                            return Text(
-                              "     $size",
-                              style: TextStyle(fontSize: 20.0),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                  ],
-                ),
+                fontSize: 23.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 10.0),
-            InkWell(
-              child: Card(
-                color: Colors.amber[200],
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                    color: Colors.amber,
-                  ),
-                  borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '   Color    ',
-                          style: GoogleFonts.montserrat(fontSize: 18.0),
-                        ),
-                        FutureBuilder(
-                          future: _fetch(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState !=
-                                ConnectionState.done) {
-                              return Text("    ");
-                            }
-                            return Text(
-                              "     $color",
-                              style: TextStyle(fontSize: 20.0),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 10.0),
-            InkWell(
-              child: Card(
-                color: Colors.amber[200],
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                    color: Colors.amber,
-                  ),
-                  borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          ' Price    ',
-                          style: GoogleFonts.montserrat(fontSize: 18.0),
-                        ),
-                        FutureBuilder(
-                          future: _fetch(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState !=
-                                ConnectionState.done) {
-                              return Text("    ");
-                            }
-                            return Text(
-                              "     $price",
-                              style: TextStyle(fontSize: 20.0),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 10.0),
-            InkWell(
-              child: Card(
-                color: Colors.amber[200],
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                    color: Colors.amber,
-                  ),
-                  borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '   Date    ',
-                          style: GoogleFonts.montserrat(fontSize: 18.0),
-                        ),
-                        FutureBuilder(
-                          future: _fetch(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState !=
-                                ConnectionState.done) {
-                              return Text("    ");
-                            }
-                            return Text(
-                              "     $date",
-                              style: TextStyle(fontSize: 20.0),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 10.0),
-            InkWell(
-              child: Card(
-                color: Colors.amber[200],
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                    color: Colors.amber,
-                  ),
-                  borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '   Time    ',
-                          style: GoogleFonts.montserrat(fontSize: 18.0),
-                        ),
-                        FutureBuilder(
-                          future: _fetch(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState !=
-                                ConnectionState.done) {
-                              return Text("    ");
-                            }
-                            return Text(
-                              "     $time",
-                              style: TextStyle(fontSize: 20.0),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 10.0),
-            InkWell(
-              child: Card(
-                color: Colors.amber[200],
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                    color: Colors.amber,
-                  ),
-                  borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '   Payment    ',
-                          style: GoogleFonts.montserrat(fontSize: 18.0),
-                        ),
-                        FutureBuilder(
-                          future: _fetch(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState !=
-                                ConnectionState.done) {
-                              return Text("    ");
-                            }
-                            return Text(
-                              "     $payment",
-                              style: TextStyle(fontSize: 20.0),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 10.0),
-            InkWell(
-              child: Card(
-                color: Colors.amber[200],
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                    color: Colors.amber,
-                  ),
-                  borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '   Delivery Boy    ',
-                          style: GoogleFonts.montserrat(fontSize: 18.0),
-                        ),
-                        FutureBuilder(
-                          future: _fetch(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState !=
-                                ConnectionState.done) {
-                              return Text("   ");
-                            }
-                            return Text(
-                              "     $delivery",
-                              style: TextStyle(fontSize: 20.0),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 10.0),
-            InkWell(
-              child: Card(
-                color: Colors.amber[200],
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(
-                    color: Colors.amber,
-                  ),
-                  borderRadius: BorderRadius.circular(20.0), //<-- SEE HERE
-                ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '   Status    ',
-                          style: GoogleFonts.montserrat(fontSize: 18.0),
-                        ),
-                        FutureBuilder(
-                          future: _fetch(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState !=
-                                ConnectionState.done) {
-                              return Text("   ");
-                            }
-                            return Text(
-                              "     $status",
-                              style: TextStyle(fontSize: 20.0),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10.0),
-                  ],
-                ),
-              ),
+            SizedBox(height: 10.0),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: exchangeBookings.length,
+              itemBuilder: (context, index) {
+                return _buildExchangeBookingCard(exchangeBookings[index]);
+              },
             ),
           ],
         ),
@@ -387,24 +55,61 @@ class ViewExchangeBookingPageState extends State<ViewExchangeBookingPage> {
     );
   }
 
+  Widget _buildExchangeBookingCard(Map<String, dynamic> booking) {
+    return InkWell(
+      child: Card(
+        color: Colors.amber[200],
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Colors.amber),
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 10.0),
+            _buildBookingDetailRow("Size", booking['size']),
+            _buildBookingDetailRow("Color", booking['color']),
+            _buildBookingDetailRow("Price", booking['price']),
+            _buildBookingDetailRow("Date", booking['date']),
+            _buildBookingDetailRow("Time", booking['time']),
+            _buildBookingDetailRow("Payment", booking['payment']),
+            _buildBookingDetailRow("Delivery Boy", booking['deliveryBoy']),
+            _buildBookingDetailRow("Status", booking['status']),
+            SizedBox(height: 10.0),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBookingDetailRow(String label, dynamic value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '   $label    ',
+          style: GoogleFonts.montserrat(fontSize: 18.0),
+        ),
+        Text(
+          "     $value",
+          style: TextStyle(fontSize: 20.0),
+        ),
+      ],
+    );
+  }
+
   _fetch() async {
     final firebaseUser = FirebaseAuth.instance.currentUser!;
-    //if (firebaseUser != null)
-    await FirebaseFirestore.instance
-        .collection('Exchange Booking')
-        .doc(firebaseUser.uid)
-        .get()
-        .then((ds) {
-      size = ds.get('Size');
-      color = ds.get('Color');
-      price = ds.get('price');
-      date = ds.get('Date');
-      time = ds.get('Time');
-      payment = ds.get('Payment');
-      delivery = ds.get('Delivery boy');
-      status = ds.get('Status');
-    }).catchError((e) {
-      print(e);
-    });
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(firebaseUser.uid)
+          .collection('ExchangeBookings') // Updated collection name
+          .get();
+      setState(() {
+        exchangeBookings = querySnapshot.docs.map((doc) => doc.data()).toList();
+      });
+    } catch (e) {
+      print('Error fetching exchange bookings: $e');
+    }
   }
 }

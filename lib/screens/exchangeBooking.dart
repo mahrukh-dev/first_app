@@ -3,6 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../components/CartItemsProvider.dart';
+import '../components/ExchangeBookingItem.dart';
+import 'AddToCartPage.dart';
 
 class ExchangeBookingPage extends StatefulWidget {
   const ExchangeBookingPage({Key? key}) : super(key: key);
@@ -46,6 +51,39 @@ class ExchangeBookingPageState extends State<ExchangeBookingPage> {
     }
   }
 
+  void addExchangeBookingToCart() {
+    var time = DateTime.now();
+
+    if (_value != null && col != null) {
+      var exchangeBookingItem = ExchangeBookingItem(
+        id: '', // Generate unique ID or use timestamp
+        size: '$_value', // Adjust size value according to your requirement
+        color: colorr,
+        time: DateFormat("jms").format(time),
+        date: DateFormat("yMMMMd").format(time),
+        payment: 'Pending',
+        deliveryBoy: 'Pending',
+        status: 'Pending',
+        isActive: 'true',
+        price: price,
+      );
+
+      // Access the CartItemsProvider instance
+      var cartItemsProvider = Provider.of<CartItemsProvider>(context, listen: false);
+
+      // Add the exchange booking item to the exchange booking items list
+      cartItemsProvider.addToExchangeBooking(exchangeBookingItem);
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AddToCartPage(),
+        ),
+      );
+    } else {
+      // Handle case where _value or col is null
+    }
+  }
   Future Addexchangebooking() async {
     var time = DateTime.now();
     var FireUser = FirebaseAuth.instance.currentUser!;
@@ -318,7 +356,8 @@ class ExchangeBookingPageState extends State<ExchangeBookingPage> {
                 onPressed: () {
                   setcolor();
                   setprice();
-                  Addexchangebooking();
+                  addExchangeBookingToCart();
+                 // Addexchangebooking();
                 },
                 //child: Text('Complaints & Queries'),
                 style: ElevatedButton.styleFrom(

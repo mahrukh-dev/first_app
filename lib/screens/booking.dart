@@ -28,11 +28,6 @@ class BookingPageState extends State<BookingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        title: Text("New Booking"),
-        backgroundColor: Colors.orange,
-        centerTitle: true,
-      ),*/
       backgroundColor: Colors.amber[100],
       body: SingleChildScrollView(
         child: Column(
@@ -386,17 +381,7 @@ class BookingPageState extends State<BookingPage> {
           builder: (context) => AddToCartPage(),
         ),
       );
-      // Add the cart item to the list of cart items
-      // cartItemsList.add(cartItem);
-      //
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => AddToCartPage(cartItems: cartItemsList),
-      //   ),
-      // );
     } else {
-      // Show error message
     }
   }
 }
